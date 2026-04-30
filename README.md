@@ -1,0 +1,1 @@
+# pvy_django_zaverecny

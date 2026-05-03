@@ -1,0 +1,11 @@
+<h1>Seznam hráčů</h1>
+
+<ul>
+{% for player in players %}
+    <li>
+        <a href="/players/{{ player.player_id }}/">
+            {{ player.username }}
+        </a>
+    </li>
+{% endfor %}
+</ul>

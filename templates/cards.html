@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Karty</h2>
+
+{% for card in cards %}
+<div class="card">
+    <h3>{{ card.name }}</h3>
+    <p>{{ card.rarity }} | Elixir: {{ card.elixircost }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

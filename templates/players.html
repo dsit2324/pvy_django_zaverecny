@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Seznam hráčů</h2>
+
+{% for player in players %}
+<div class="card">
+    <h3>{{ player.username }}</h3>
+    <p>Výhry: {{ player.battles_won }}</p>
+    <a href="/players/{{ player.player_id }}/">Detail</a>
+</div>
+{% endfor %}
+
+{% endblock %}

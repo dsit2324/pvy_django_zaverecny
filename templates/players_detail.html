@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ player.username }}</h2>
+    <p><strong>Výhry:</strong> {{ player.battles_won }}</p>
+    <p><strong>Aréna:</strong> {{ player.arena }}</p>
+    <p><strong>Clan:</strong> {{ player.clan }}</p>
+</div>
+
+<a href="/players/">← zpět</a>
+{% endblock %}

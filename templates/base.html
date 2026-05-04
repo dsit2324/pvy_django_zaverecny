@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Django Clash</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            transition: 0.2s;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Django Clash</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/players/">Hráči</a>
+        <a href="/cards/">Karty</a>
+        <a href="/battles/">Souboje</a>
+        <a href="/clans/">Clany</a>
+        <a href="/arenas/">Areny</a>
+    </nav>
+</header>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

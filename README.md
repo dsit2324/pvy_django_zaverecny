@@ -1,8 +1,8 @@
 # Clash Royale Database
 
-## Dominik Svoboda - IT3
+## Autor
 
-[Tvé jméno]
+Dominik Svoboda
 
 ## Popis projektu
 

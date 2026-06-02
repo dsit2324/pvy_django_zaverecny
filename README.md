@@ -2,7 +2,7 @@
 
 ## Autor
 
-Dominik Svoboda
+Dominik Svoboda - třída: IT3
 
 ## Popis projektu
 

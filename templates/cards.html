@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-white mb-4">🃏 Karty</h1>
+
+<div class="row">
+
+{% for card in cards %}
+
+<div class="col-md-4 mb-4">
+
+    <div class="card card-custom">
+
+        <div class="card-body">
+
+            <h4>{{ card.name }}</h4>
+
+            <p>Rarita: {{ card.rarity }}</p>
+
+            <p>Elixir: {{ card.elixircost }}</p>
+
+            <p>Typ: {{ card.type }}</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

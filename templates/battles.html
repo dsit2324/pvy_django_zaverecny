@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Souboje</h2>
+
+{% for battle in battles %}
+<div class="card">
+    <p>{{ battle.player1 }} vs {{ battle.player2 }}</p>
+    <p>Vítěz: {{ battle.winner }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

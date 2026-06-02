@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Areny</h2>
+
+{% for arena in arenas %}
+<div class="card">
+    <h3>{{ arena.name }}</h3>
+    <p>{{ arena.min_battles_won }} - {{ arena.max_battles_won }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

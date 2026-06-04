@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero">
+
+    <h1 class="display-4">🏆 Clash Royale Database</h1>
+
+    <p class="lead">
+        Přehled hráčů, karet, arén, klanů a soubojů.
+    </p>
+
+    <hr>
+
+    <div class="row mt-4">
+
+        <div class="col-md-4 mb-3">
+            <a href="/players/" class="btn btn-primary btn-lg w-100">
+                👤 Hráči
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <a href="/cards/" class="btn btn-warning btn-lg w-100">
+                🃏 Karty
+            </a>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <a href="/battles/" class="btn btn-danger btn-lg w-100">
+                ⚔ Souboje
+            </a>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <a href="/clans/" class="btn btn-success btn-lg w-100">
+                🛡 Klany
+            </a>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <a href="/arenas/" class="btn btn-info btn-lg w-100">
+                🏟 Arény
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

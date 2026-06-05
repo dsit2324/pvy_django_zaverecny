@@ -1,105 +1,186 @@
 from django.db import models
+from django.urls import reverse
+from django.core.validators import MinValueValidator
 
 
 class Arena(models.Model):
     arena_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
-    min_battles_won = models.IntegerField()
-    max_battles_won = models.IntegerField()
+    name = models.CharField(
+        max_length=255,
+        verbose_name="Název arény"
+    )
+    min_battles_won = models.IntegerField(
+        verbose_name="Minimální počet výher"
+    )
+    max_battles_won = models.IntegerField(
+        verbose_name="Maximální počet výher"
+    )
 
     class Meta:
-        ordering = ['min_battles_won']
-        verbose_name = 'Arena'
-        verbose_name_plural = 'Arenas'
-        db_table = 'game_arena'
+        verbose_name = "Aréna"
+        verbose_name_plural = "Arény"
+        ordering = ["min_battles_won"]
+        db_table = "game_arena"
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("arena_detail", args=[self.arena_id])
 
 
 class Clan(models.Model):
     clan_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
-    created_at = models.DateTimeField()
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        verbose_name="Název klanu"
+    )
+    created_at = models.DateTimeField(
+        verbose_name="Datum vytvoření"
+    )
 
     class Meta:
-        ordering = ['name']
-        verbose_name = 'Clan'
-        verbose_name_plural = 'Clans'
-        db_table = 'game_clan'
+        verbose_name = "Klan"
+        verbose_name_plural = "Klany"
+        ordering = ["name"]
+        db_table = "game_clan"
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("clan_detail", args=[self.clan_id])
 
 
 class Player(models.Model):
     player_id = models.IntegerField(primary_key=True)
-    username = models.CharField(max_length=255)
-    battles_won = models.IntegerField()
+
+    username = models.CharField(
+        max_length=255,
+        unique=True,
+        verbose_name="Uživatelské jméno"
+    )
+
+    battles_won = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(0)],
+        verbose_name="Počet výher"
+    )
 
     arena = models.ForeignKey(
         Arena,
         on_delete=models.CASCADE,
-        db_column='arena_id'
+        verbose_name="Aréna"
     )
 
     clan = models.ForeignKey(
         Clan,
         on_delete=models.CASCADE,
-        db_column='clan_id'
+        verbose_name="Klan"
     )
 
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(
+        verbose_name="Datum vytvoření"
+    )
 
     class Meta:
-        ordering = ['username']
-        verbose_name = 'Player'
-        verbose_name_plural = 'Players'
-        db_table = 'game_player'
+        verbose_name = "Hráč"
+        verbose_name_plural = "Hráči"
+        ordering = ["username"]
+        db_table = "game_player"
+
+    def __str__(self):
+        return f"{self.username} ({self.battles_won} výher)"
+
+    def get_absolute_url(self):
+        return reverse("player_detail", args=[self.player_id])
 
 
 class Card(models.Model):
-    RARITY_CHOICES = [
+
+    RARITY_CHOICES = (
         ("common", "Common"),
         ("rare", "Rare"),
         ("epic", "Epic"),
         ("legendary", "Legendary"),
-    ]
+    )
 
-    TYPE_CHOICES = [
+    TYPE_CHOICES = (
         ("troop", "Troop"),
         ("spell", "Spell"),
         ("building", "Building"),
-    ]
+    )
 
     card_id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    rarity = models.CharField(max_length=10, choices=RARITY_CHOICES)
-    elixircost = models.IntegerField()
-    type = models.CharField(max_length=10, choices=TYPE_CHOICES)
+
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        verbose_name="Název karty"
+    )
+
+    description = models.TextField(
+        verbose_name="Popis"
+    )
+
+    rarity = models.CharField(
+        max_length=10,
+        choices=RARITY_CHOICES,
+        verbose_name="Vzácnost"
+    )
+
+    elixircost = models.IntegerField(
+        validators=[MinValueValidator(0)],
+        verbose_name="Cena elixíru"
+    )
+
+    type = models.CharField(
+        max_length=10,
+        choices=TYPE_CHOICES,
+        verbose_name="Typ karty"
+    )
 
     class Meta:
-        ordering = ['name']
-        verbose_name = 'Card'
-        verbose_name_plural = 'Cards'
-        db_table = 'game_card'
+        verbose_name = "Karta"
+        verbose_name_plural = "Karty"
+        ordering = ["name"]
+        db_table = "game_card"
+
+    def __str__(self):
+        return f"{self.name} ({self.rarity})"
+
+    def get_absolute_url(self):
+        return reverse("card_detail", args=[self.card_id])
 
 
 class PlayersCards(models.Model):
     player = models.ForeignKey(
         Player,
         on_delete=models.CASCADE,
-        db_column='player_id'
+        verbose_name="Hráč"
     )
 
     card = models.ForeignKey(
         Card,
         on_delete=models.CASCADE,
-        db_column='card_id'
+        verbose_name="Karta"
     )
 
-    level = models.IntegerField()
+    level = models.IntegerField(
+        default=1,
+        validators=[MinValueValidator(1)],
+        verbose_name="Úroveň"
+    )
 
     class Meta:
-        unique_together = ('player', 'card')
-        verbose_name = 'Player Card'
-        verbose_name_plural = 'Player Cards'
-        db_table = 'game_playerscards'
+        verbose_name = "Karta hráče"
+        verbose_name_plural = "Karty hráčů"
+        unique_together = ("player", "card")
+        db_table = "game_playerscards"
+
+    def __str__(self):
+        return f"{self.player.username} - {self.card.name} (lvl {self.level})"
 
 
 class Battle(models.Model):
@@ -107,30 +188,42 @@ class Battle(models.Model):
 
     player1 = models.ForeignKey(
         Player,
-        related_name='player1_battles',
+        related_name="player1_battles",
         on_delete=models.CASCADE,
-        db_column='player1_id'
+        verbose_name="Hráč 1"
     )
 
     player2 = models.ForeignKey(
         Player,
-        related_name='player2_battles',
+        related_name="player2_battles",
         on_delete=models.CASCADE,
-        db_column='player2_id'
+        verbose_name="Hráč 2"
     )
 
     winner = models.ForeignKey(
         Player,
-        related_name='won_battles',
+        related_name="won_battles",
         on_delete=models.CASCADE,
-        db_column='winner_id'
+        verbose_name="Vítěz"
     )
 
-    played_at = models.DateTimeField()
-    duration = models.IntegerField()
+    played_at = models.DateTimeField(
+        verbose_name="Datum souboje"
+    )
+
+    duration = models.IntegerField(
+        validators=[MinValueValidator(1)],
+        verbose_name="Délka souboje (s)"
+    )
 
     class Meta:
-        ordering = ['-played_at']
-        verbose_name = 'Battle'
-        verbose_name_plural = 'Battles'
-        db_table = 'game_battle'
+        verbose_name = "Souboj"
+        verbose_name_plural = "Souboje"
+        ordering = ["-played_at"]
+        db_table = "game_battle"
+
+    def __str__(self):
+        return f"{self.player1} vs {self.player2}"
+
+    def get_absolute_url(self):
+        return reverse("battle_detail", args=[self.battle_id])

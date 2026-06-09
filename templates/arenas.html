@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>🏟 Arény</h1>
+<div class="container">
+    <h1 class="mb-4 text-dark fw-bold"><span class="text-info">🏟️</span> Přehled Arén</h1>
 
-<div class="row">
-    {% for arena in arenas %}
-    <div class="col-md-4 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <h4>{{ arena.name }}</h4>
-                <p>Výhry: {{ arena.min_battles_won }} - {{ arena.max_battles_won }}</p>
+    <div class="row">
+        {% for arena in arenas %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card card-custom h-100 shadow-sm border-0">
+                <div class="card-body p-4 d-flex flex-column justify-content-between">
+                    <div>
+                        <h4 class="card-title fw-bold text-primary mb-3">{{ arena.name }}</h4>
+                        <div class="d-flex align-items-center bg-light p-3 rounded-3">
+                            <span class="fs-3 me-2">🏆</span>
+                            <div>
+                                <small class="text-muted d-block text-uppercase fw-bold fs-7">Potřebné výhry</small>
+                                <span class="fw-bold text-dark">{{ arena.min_battles_won }} – {{ arena.max_battles_won }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

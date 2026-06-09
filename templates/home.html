@@ -1,51 +1,97 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container py-5">
+    
+    <div class="text-center mb-5 p-5 bg-dark text-white rounded-4 shadow">
+        <h1 class="display-3 fw-bold mb-3">
+            <span class="text-warning">🏆</span> Clash Royale Database
+        </h1>
+        <p class="lead text-light opacity-75 fs-4">
+            Kompletní přehled hráčů, karet, arén, klanů a soubojů na jednom místě.
+        </p>
+        <div class="mx-auto bg-warning rounded" style="height: 4px; width: 80px;"></div>
+    </div>
 
-<div class="hero">
+    <div class="row g-4 justify-content-center">
 
-    <h1 class="display-4">🏆 Clash Royale Database</h1>
-
-    <p class="lead">
-        Přehled hráčů, karet, arén, klanů a soubojů.
-    </p>
-
-    <hr>
-
-    <div class="row mt-4">
-
-        <div class="col-md-4 mb-3">
-            <a href="/players/" class="btn btn-primary btn-lg w-100">
-                👤 Hráči
+        <div class="col-md-6 col-lg-4">
+            <a href="/players/" class="text-decoration-none text-dark">
+                <div class="card h-100 border-0 shadow-sm custom-card card-players">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">👤</div>
+                        <h3 class="card-title h4 fw-bold">Hráči</h3>
+                        <p class="card-text text-muted small">Žebříčky, statistiky a profily aktivních hráčů.</p>
+                    </div>
+                </div>
             </a>
         </div>
 
-        <div class="col-md-4 mb-3">
-            <a href="/cards/" class="btn btn-warning btn-lg w-100">
-                🃏 Karty
+        <div class="col-md-6 col-lg-4">
+            <a href="/cards/" class="text-decoration-none text-dark">
+                <div class="card h-100 border-0 shadow-sm custom-card card-cards">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🃏</div>
+                        <h3 class="card-title h4 fw-bold">Karty</h3>
+                        <p class="card-text text-muted small">Statistiky poškození, elixírová cena a synergie.</p>
+                    </div>
+                </div>
             </a>
         </div>
 
-        <div class="col-md-4 mb-3">
-            <a href="/battles/" class="btn btn-danger btn-lg w-100">
-                ⚔ Souboje
+        <div class="col-md-6 col-lg-4">
+            <a href="/battles/" class="text-decoration-none text-dark">
+                <div class="card h-100 border-0 shadow-sm custom-card card-battles">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">⚔️</div>
+                        <h3 class="card-title h4 fw-bold">Souboje</h3>
+                        <p class="card-text text-muted small">Historie zápasů a analýza herních strategií.</p>
+                    </div>
+                </div>
             </a>
         </div>
 
-        <div class="col-md-6 mb-3">
-            <a href="/clans/" class="btn btn-success btn-lg w-100">
-                🛡 Klany
+        <div class="col-md-6 col-lg-4">
+            <a href="/clans/" class="text-decoration-none text-dark">
+                <div class="card h-100 border-0 shadow-sm custom-card card-clans">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🛡️</div>
+                        <h3 class="card-title h4 fw-bold">Klany</h3>
+                        <p class="card-text text-muted small">Vyhledávání klanů, statistiky klanových válek.</p>
+                    </div>
+                </div>
             </a>
         </div>
 
-        <div class="col-md-6 mb-3">
-            <a href="/arenas/" class="btn btn-info btn-lg w-100">
-                🏟 Arény
+        <div class="col-md-6 col-lg-4">
+            <a href="/arenas/" class="text-decoration-none text-dark">
+                <div class="card h-100 border-0 shadow-sm custom-card card-arenas">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🏟️</div>
+                        <h3 class="card-title h4 fw-bold">Arény</h3>
+                        <p class="card-text text-muted small">Seznam trofejových arén a odměn za postup.</p>
+                    </div>
+                </div>
             </a>
         </div>
 
     </div>
-
 </div>
 
+<style>
+    .custom-card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        border-bottom: 4px solid transparent !important;
+    }
+    .custom-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+    /* Barevné akcenty na spodu karet podle původních barev tlačítek */
+    .card-players:hover { border-color: #0d6efd !important; }  /* Modrá */
+    .card-cards:hover { border-color: #ffc107 !important; }    /* Žlutá */
+    .card-battles:hover { border-color: #dc3545 !important; }  /* Červená */
+    .card-clans:hover { border-color: #198754 !important; }    /* Zelená */
+    .card-arenas:hover { border-color: #0dcaf0 !important; }   /* Tyrkysová */
+</style>
 {% endblock %}

@@ -1,27 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container max-width-md" style="max-width: 600px;">
+    
+    <div class="card card-custom shadow border-0 mt-4">
+        
+        <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+            <span class="display-3 d-block mb-2">👑</span>
+            <h1 class="fw-bold m-0">{{ player.username }}</h1>
+            <small class="opacity-75">Profil hráče</small>
+        </div>
 
-<div class="card card-custom">
+        <div class="card-body p-4">
+            
+            <ul class="list-group list-group-flush">
+                
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-transparent">
+                    <span class="text-muted"><span class="me-2">🏆</span> Počet výher:</span>
+                    <span class="fs-5 fw-bold text-warning">{{ player.battles_won }}</span>
+                </li>
 
-    <div class="card-body">
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-transparent">
+                    <span class="text-muted"><span class="me-2">🏟️</span> Aktuální Aréna:</span>
+                    <span class="fw-bold text-dark">{{ player.arena|default:"Žádná" }}</span>
+                </li>
 
-        <h1>{{ player.username }}</h1>
+                <li class="list-group-item d-flex justify-content-between align-items-center py-3 bg-transparent">
+                    <span class="text-muted"><span class="me-2">👥</span> Klan:</span>
+                    <span class="fw-bold text-info">{{ player.clan|default:"Bez klanu" }}</span>
+                </li>
 
-        <hr>
+            </ul>
 
-        <p><strong>🏆 Výhry:</strong> {{ player.battles_won }}</p>
+            <div class="text-center mt-4">
+                <a href="/players/" class="btn btn-outline-secondary px-4 py-2 rounded-3 fw-bold">
+                    ⬅️ Zpět na seznam
+                </a>
+            </div>
 
-        <p><strong>🏟 Aréna:</strong> {{ player.arena }}</p>
-
-        <p><strong>👥 Clan:</strong> {{ player.clan }}</p>
-
-        <a href="/players/" class="btn btn-secondary">
-            Zpět
-        </a>
+        </div>
 
     </div>
-
 </div>
-
 {% endblock %}

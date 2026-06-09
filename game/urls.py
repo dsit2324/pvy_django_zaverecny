@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth.views import LogoutView  # <-- PŘIDÁNO
 from . import views
 from .views import CustomLoginView
 
@@ -12,4 +13,5 @@ urlpatterns = [
     path('arenas/', views.arenas_list),
     path("register/", views.register),
     path("accounts/login/", CustomLoginView.as_view()),
+    path("logout/", LogoutView.as_view(), name="logout"),  # <-- PŘIDÁNO
 ]

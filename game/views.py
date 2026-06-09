@@ -33,7 +33,7 @@ def players_list(request):
 
 def player_detail(request, id):
     player = get_object_or_404(Player, player_id=id)
-    return render(request, "player_detail.html", {"player": player})
+    return render(request, "players_detail.html", {"player": player})
 
 
 def cards_list(request):

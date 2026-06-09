@@ -14,11 +14,15 @@
         html, body {
             margin: 0;
             padding: 0;
+            height: 100%;
         }
 
+        /* Layout: full-height page with footer stuck to bottom */
         body {
             background: #ffffff;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .navbar {
@@ -52,10 +56,15 @@
 
         footer {
             background-color: #1f3c88;
-            margin-top: 50px;
+            margin-top: auto;
             padding: 20px;
             text-align: center;
             color: white;
+        }
+
+        /* Make the main content area expand to fill available space */
+        .content-wrap {
+            flex: 1 0 auto;
         }
 
         .user-info {
@@ -108,10 +117,10 @@
         </div>
     </nav>
 
-    <div class="container py-4">
+    <main class="container py-4 content-wrap">
         {% block content %}
         {% endblock %}
-    </div>
+    </main>
 
     <footer>
         Dominik Svoboda - IT3 © 2026

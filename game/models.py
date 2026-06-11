@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 
 
 class Arena(models.Model):
+    # Poznámka pro vývojáře: Aréna je hlavní kategorizace hráče podle počtu výher.
     arena_id = models.IntegerField(primary_key=True)
     name = models.CharField(
         max_length=255,
@@ -30,6 +31,7 @@ class Arena(models.Model):
 
 
 class Clan(models.Model):
+    # Poznámka pro vývojáře: Klan slouží jako stabilní skupina hráčů; vytvoření je časově závislé.
     clan_id = models.IntegerField(primary_key=True)
     name = models.CharField(
         max_length=255,
@@ -54,6 +56,7 @@ class Clan(models.Model):
 
 
 class Player(models.Model):
+    # Poznámka pro vývojáře: Hráč je hlavní entita. Je propojen s Arenou a Klanem přes FK.
     player_id = models.IntegerField(primary_key=True)
 
     username = models.CharField(
@@ -98,6 +101,7 @@ class Player(models.Model):
 
 
 class Card(models.Model):
+    # Poznámka pro vývojáře: Karta má vlastní rarity a type, které se používají pro filtrování a výpis.
 
     RARITY_CHOICES = (
         ("common", "Common"),
@@ -155,6 +159,7 @@ class Card(models.Model):
 
 
 class PlayersCards(models.Model):
+    # Poznámka pro vývojáře: Tato tabulka řeší vztah mnoho-k-velmi-mnoha mezi hráči a kartami.
     player = models.ForeignKey(
         Player,
         on_delete=models.CASCADE,
@@ -184,6 +189,7 @@ class PlayersCards(models.Model):
 
 
 class Battle(models.Model):
+    # Poznámka pro vývojáře: Souboj ukládá výsledky zápasů a používá více FK na Player.
     battle_id = models.IntegerField(primary_key=True)
 
     player1 = models.ForeignKey(

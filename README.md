@@ -1,75 +1,72 @@
 # Clash Royale Database
 
-## Autor
+Django aplikace pro přehled hráčů, karet, klanů, arén a soubojů z hry Clash Royale.
 
-Dominik Svoboda - třída: IT3
+## Co aplikace umí
 
-## Popis projektu
+- prohlížení seznamu hráčů a detailů profilu
+- přehled karet, klanů, arén a soubojů
+- registrace a přihlášení uživatelů
+- osobní funkce pro přihlášené uživatele, například ukládání oblíbených hráčů
+- administrace dat přes Django Admin
 
-Webová aplikace vytvořená v Django frameworku sloužící k evidenci dat ze hry Clash Royale.
+## Technologie
 
-Aplikace umožňuje správu:
+- Python 3
+- Django
+- SQLite
+- Bootstrap 5
+- HTML / CSS
 
-* hráčů
-* karet
-* klanů
-* arén
-* soubojů
+## Struktura projektu
 
-## Použité technologie
-
-* Python
-* Django
-* SQLite3
-* Bootstrap 5
-* HTML
-* CSS
-
-## Funkce aplikace
-
-* Administrace dat pomocí Django Admin
-* Výpis hráčů
-* Detail hráče
-* Výpis karet
-* Výpis arén
-* Výpis klanů
-* Výpis soubojů
+- `game/` – modely, formuláře, view, URL a testy
+- `templates/` – šablony pro rozhraní aplikace
+- `fixtures/` – ukázková data pro naplnění databáze
 
 ## Instalace
 
-Vytvoření virtuálního prostředí:
+1. Vytvořte virtuální prostředí
+   ```bash
+   python -m venv .venv
+   ```
+2. Aktivujte prostředí
+   ```bash
+   .venv\Scripts\activate
+   ```
+   nebo na Linux/macOS:
+   ```bash
+   source .venv/bin/activate
+   ```
+3. Nainstalujte závislosti
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Spusťte migrace a načtěte demo data
+   ```bash
+   python manage.py migrate
+   python manage.py loaddata fixtures/sample_data.json
+   ```
+5. Spusťte aplikaci
+   ```bash
+   python manage.py runserver
+   ```
 
-python -m venv .venv
+## Přístupové údaje
 
-Aktivace prostředí:
+- webová aplikace: http://127.0.0.1:8000/
+- administrace: http://127.0.0.1:8000/admin/
+- výchozí testovací účet pro admin: `admin / adminpass`
 
-.venv\Scripts\activate
+## Testování
 
-Instalace závislostí:
-
-pip install -r requirements.txt
-
-Spuštění serveru:
-
-python manage.py runserver
-
-## Odevzdání a poznámky
-
-- Projekt obsahuje datový model s více než 3 navzájem propojenými objekty (`Player`, `Card`, `Clan`, `Arena`, `Battle`, `PlayersCards`).
-- V databázi jsou nahraná ukázková data (fixtures) — viz `fixtures/sample_data.json`.
-- Pro rychlé ověření je vytvořen superuživatel: uživatel `admin`, heslo `adminpass`. Z bezpečnostních důvodů heslo po přihlášení prosím změňte.
-
-## Jak odevzdat
-
-1. Zkontrolujte repozitář na GitHubu (remote): https://github.com/dsit2324/pvy_django_zaverecny
-2. Ujistěte se, že `requirements.txt` je v kořenovém adresáři a že `fixtures/sample_data.json` je přítomný.
-3. Vygenerujte migrační soubory a spusťte migrations, pokud budete nasazovat jinde:
+Pro ověření funkčnosti projektu spusťte:
 
 ```bash
-python manage.py makemigrations
-python manage.py migrate
-python manage.py loaddata fixtures/sample_data.json
+python manage.py test
 ```
 
-4. Přihlaste se do administrace: `http://127.0.0.1:8000/admin/` (přihlašovací údaje viz výše).
+## Poznámky
+
+Projekt obsahuje modely `Player`, `Card`, `Clan`, `Arena`, `Battle` a `PlayersCards` a je připravený pro další rozšíření o další funkce pro přihlášené uživatele.
 

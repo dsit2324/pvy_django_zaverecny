@@ -22,7 +22,7 @@ Django aplikace pro přehled hráčů, karet, klanů, arén a soubojů z hry Cla
 
 - `game/` – modely, formuláře, view, URL a testy
 - `templates/` – šablony pro rozhraní aplikace
-- `fixtures/` – ukázková data pro naplnění databáze
+- `django_zaverecny/` – hlavní Django project settings
 
 ## Instalace
 
@@ -42,15 +42,24 @@ Django aplikace pro přehled hráčů, karet, klanů, arén a soubojů z hry Cla
    ```bash
    pip install -r requirements.txt
    ```
-4. Spusťte migrace a načtěte demo data
+4. Pokud chcete použít MySQL, nastavte proměnné prostředí před migrací
+   ```bash
+   export MYSQL_DATABASE=django_zaverecny
+   export MYSQL_USER=root
+   export MYSQL_PASSWORD=secret
+   export MYSQL_HOST=127.0.0.1
+   export MYSQL_PORT=3306
+   ```
+5. Spusťte migrace a vytvořte demo data
    ```bash
    python manage.py migrate
-   python manage.py loaddata fixtures/sample_data.json
    ```
-5. Spusťte aplikaci
+6. Spusťte aplikaci
    ```bash
    python manage.py runserver
    ```
+
+> Pokud není `MYSQL_DATABASE` nastaveno, aplikace použije lokální SQLite databázi `db.sqlite3`.
 
 ## Přístupové údaje
 

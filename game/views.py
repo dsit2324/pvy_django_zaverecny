@@ -1,10 +1,19 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Player, Card, Battle, Clan, Arena
-from .forms import RegisterForm
 from django.contrib.auth.views import LoginView
+
+
+from .forms import RegisterForm
+from .models import Player, Card, Battle, Clan, Arena
+
 
 class CustomLoginView(LoginView):
     template_name = "registration/login.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f"Vítej zpět, {self.request.user.username}! 👋")
+        return response
 
 def register(request):
     if request.method == "POST":
@@ -19,12 +28,33 @@ def register(request):
 
 
 def home(request):
+    favorite_ids = request.session.get('favorite_players', [])
+    favorite_players = Player.objects.filter(player_id__in=favorite_ids) if favorite_ids else []
+
     context = {
         "players_count": Player.objects.count(),
         "cards_count": Card.objects.count(),
         "battles_count": Battle.objects.count(),
+        "is_authenticated": request.user.is_authenticated,
+        "favorite_players": favorite_players,
     }
     return render(request, "home.html", context)
+
+
+def toggle_favorite_player(request, player_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    favorite_players = set(request.session.get('favorite_players', []))
+    if player_id in favorite_players:
+        favorite_players.remove(player_id)
+        messages.info(request, 'Hráč byl odebrán z oblíbených.')
+    else:
+        favorite_players.add(player_id)
+        messages.success(request, 'Hráč byl přidán do oblíbených.')
+
+    request.session['favorite_players'] = list(favorite_players)
+    return redirect('players')
 
 
 def players_list(request):

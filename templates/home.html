@@ -13,6 +13,51 @@
         <div class="mx-auto bg-warning rounded" style="height: 4px; width: 80px;"></div>
     </div>
 
+    {% if user.is_authenticated %}
+    <div class="alert alert-success shadow-sm border-0 rounded-4 mb-4">
+        <h4 class="mb-2">Vítej zpět, {{ user.username }}! 👋</h4>
+        <p class="mb-0">Nyní máš přístup k osobním akcím a rychlým odkazům v aplikaci.</p>
+    </div>
+
+    {% if favorite_players %}
+    <div class="card card-custom shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-3">⭐ Oblíbení hráči</h5>
+            <ul class="mb-0 ps-3 text-muted">
+                {% for player in favorite_players %}
+                    <li>{{ player.username }} — {{ player.battles_won }} výher</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card card-custom h-100 shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2">🔎 Co teď můžeš dělat?</h5>
+                    <ul class="mb-0 ps-3 text-muted">
+                        <li>prohlížet seznam hráčů a jejich profily</li>
+                        <li>sledovat karty, klany a arény</li>
+                        <li>pokračovat v prohlížení databáze jako přihlášený uživatel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-custom h-100 shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2">📊 Přehled databáze</h5>
+                    <p class="mb-1"><strong>{{ players_count }}</strong> hráčů</p>
+                    <p class="mb-1"><strong>{{ cards_count }}</strong> karet</p>
+                    <p class="mb-0"><strong>{{ battles_count }}</strong> soubojů</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="row g-4 justify-content-center">
 
         <div class="col-md-6 col-lg-4">

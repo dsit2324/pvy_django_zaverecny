@@ -16,9 +16,18 @@
                         </p>
                     </div>
                     
-                    <a href="/players/{{ player.id }}/" class="btn btn-primary w-100 rounded-3 shadow-sm fw-bold">
+                    <a href="/players/{{ player.player_id }}/" class="btn btn-primary w-100 rounded-3 shadow-sm fw-bold mb-2">
                         🔍 Zobrazit Profil
                     </a>
+                    {% if user.is_authenticated %}
+                    <a href="/favorites/{{ player.player_id }}/" class="btn btn-outline-warning w-100 rounded-3 shadow-sm fw-bold">
+                        {% if player.player_id in request.session.favorite_players %}
+                            ⭐ Odebrat z oblíbených
+                        {% else %}
+                            ✨ Přidat do oblíbených
+                        {% endif %}
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

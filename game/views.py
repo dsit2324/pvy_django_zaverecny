@@ -8,6 +8,7 @@ from .models import Player, Card, Battle, Clan, Arena
 
 
 class CustomLoginView(LoginView):
+    # Poznámka pro vývojáře: vlastní login view přidává uživatelskou zprávu po úspěšném přihlášení.
     template_name = "registration/login.html"
 
     def form_valid(self, form):
@@ -16,6 +17,7 @@ class CustomLoginView(LoginView):
         return response
 
 def register(request):
+    # Poznámka pro vývojáře: registrace používá vlastní formulář a přesměrování na login po úspěchu.
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -28,6 +30,7 @@ def register(request):
 
 
 def home(request):
+    # Poznámka pro vývojáře: homepage agreguje základní statistiky a seznam oblíbených hráčů pro přihlášené uživatele.
     favorite_ids = request.session.get('favorite_players', [])
     favorite_players = Player.objects.filter(player_id__in=favorite_ids) if favorite_ids else []
 
@@ -42,6 +45,7 @@ def home(request):
 
 
 def toggle_favorite_player(request, player_id):
+    # Poznámka pro vývojáře: oblíbení hráči jsou ukládáni do session, takže fungují i bez databázové tabulky.
     if not request.user.is_authenticated:
         return redirect('login')
 

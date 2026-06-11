@@ -4,6 +4,7 @@ from . import views
 from .views import CustomLoginView
 
 urlpatterns = [
+    # Poznámka pro vývojáře: URL mapy spojují hlavní stránky, autentizaci a funkci oblíbených hráčů.
     path('', views.home, name='home'),
     path('players/', views.players_list, name='players'),
     path('players/<int:id>/', views.player_detail, name='player_detail'),

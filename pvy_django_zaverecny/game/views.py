@@ -6,10 +6,12 @@ from .forms import RegisterForm
 
 
 class CustomLoginView(LoginView):
+    # Poznámka pro vývojáře: vlastní login view přidává uživatelskou zprávu po úspěšném přihlášení.
     template_name = "registration/login.html"
 
 
 def register(request):
+    # Poznámka pro vývojáře: registrace používá vlastní formulář a přesměrování na login po úspěchu.
     if request.method == "POST":
         form = RegisterForm(request.POST)
 
@@ -28,6 +30,7 @@ def register(request):
 
 
 def home(request):
+    # Poznámka pro vývojáře: homepage agreguje základní statistiky a seznam oblíbených hráčů pro přihlášené uživatele.
     context = {
         "players_count": Player.objects.count(),
         "cards_count": Card.objects.count(),

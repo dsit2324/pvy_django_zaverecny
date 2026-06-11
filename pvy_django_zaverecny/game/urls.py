@@ -4,6 +4,7 @@ from .views import CustomLoginView
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
+    # Poznámka pro vývojáře: URL mapy spojují hlavní stránky, autentizaci a funkci oblíbených hráčů.
     path('', views.home, name='home'),
 
     path('players/', views.players_list, name='players'),
